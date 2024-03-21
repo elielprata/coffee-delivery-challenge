@@ -3,8 +3,8 @@ import { StyleSheet } from 'react-native'
 
 export const styles = StyleSheet.create({
   container: {
+    flex: 1,
     flexDirection: 'row',
-
     backgroundColor: THEME.COLORS.GRAY_200,
     borderTopStartRadius: 5,
     borderTopEndRadius: 30,
@@ -19,6 +19,9 @@ export const styles = StyleSheet.create({
     width: 96,
     height: 96,
     marginTop: -32,
+  },
+  infoContainer: {
+    flex: 1,
   },
   infoName: {
     fontFamily: THEME.FONTS.FAMILY.TITLE,
