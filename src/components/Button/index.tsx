@@ -12,7 +12,7 @@ import { THEME } from '@/styles/themes'
 
 type ButtonProps = TouchableHighlightProps & {
   children: ReactNode
-  variant?: 'default' | 'purple' | 'yellow'
+  variant?: 'default' | 'purple' | 'yellow' | 'remove'
 }
 
 type ButtonTextProps = {
@@ -28,8 +28,13 @@ function Button({ children, variant = 'default' }: ButtonProps) {
     <Pressable
       style={({ pressed }) => [
         styles.container,
-        variant === 'purple' && styles.purple,
-        variant === 'yellow' && styles.yellow,
+        pressed && styles.defaultPressed,
+        variant === 'remove' &&
+          (pressed ? styles.defaultPressed : styles.remove),
+        variant === 'purple' &&
+          (pressed ? styles.purplePressed : styles.purple),
+        variant === 'yellow' &&
+          (pressed ? styles.yellowPressed : styles.yellow),
       ]}
     >
       {children}
@@ -43,11 +48,7 @@ function ButtonText({ children }: ButtonTextProps) {
 
 function ButtonIcon({ icon }: ButtonIconProps) {
   const Icon = icon
-  return (
-    <View style={styles.iconView}>
-      <Icon color={THEME.COLORS.PURPLE} />
-    </View>
-  )
+  return <Icon size={20} color={THEME.COLORS.PURPLE} />
 }
 
 Button.Text = ButtonText
