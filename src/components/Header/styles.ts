@@ -2,25 +2,14 @@ import { THEME } from '@/styles/themes'
 import { StyleSheet } from 'react-native'
 
 export const styles = StyleSheet.create({
-  container: {
-    height: 552,
-  },
+  container: {},
   intro: {
-    height: 342,
+    height: 276,
+    paddingTop: 20,
     backgroundColor: THEME.COLORS.GRAY_900,
     paddingHorizontal: 32,
   },
-  navbar: {
-    paddingVertical: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 20,
-  },
-  locationView: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-  },
+
   locationText: {
     fontFamily: THEME.FONTS.FAMILY.TEXT,
     fontSize: THEME.FONTS.SIZES.TEXT.SM,

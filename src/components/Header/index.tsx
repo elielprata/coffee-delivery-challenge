@@ -1,27 +1,35 @@
-import { Image, Text, View } from 'react-native'
+import { Image, Text } from 'react-native'
+import Animated, {
+  Extrapolation,
+  SharedValue,
+  interpolateColor,
+  useAnimatedStyle,
+} from 'react-native-reanimated'
+
 import { styles } from './styles'
-import { MapPin } from 'phosphor-react-native'
-import { THEME } from '@/styles/themes'
-import { Cart } from '../Cart'
-import { SafeAreaView } from 'react-native-safe-area-context'
+
 import { SearchInput } from '../SearchInput'
+import { Carrousel } from '../Carrousel'
 
 import CoffeeBeans from '@/assets/coffee-beans.png'
-import { CardHighlight } from '../CardHighlight'
+import { THEME } from '@/styles/themes'
 
-export function Header() {
+type HeaderProps = {
+  scrollY: SharedValue<number>
+}
+
+export function Header({ scrollY }: HeaderProps) {
+  const animatedHeaderStyle = useAnimatedStyle(() => ({
+    backgroundColor: interpolateColor(
+      scrollY.value,
+      [0, 300],
+      [THEME.COLORS.GRAY_900, THEME.COLORS.GRAY_600]
+    ),
+  }))
+
   return (
-    <View style={styles.container}>
-      <SafeAreaView style={styles.intro}>
-        <View style={styles.navbar}>
-          <View style={styles.locationView}>
-            <MapPin weight="fill" color={THEME.COLORS.PURPLE} />
-            <Text style={styles.locationText}>Porto Alegre, RS</Text>
-          </View>
-
-          <Cart />
-        </View>
-
+    <Animated.View style={styles.container}>
+      <Animated.View style={[styles.intro, animatedHeaderStyle]}>
         <Text style={styles.title}>
           Find the perfect coffee for any time of day
         </Text>
@@ -29,22 +37,8 @@ export function Header() {
         <SearchInput value="" onChange={() => {}} />
 
         <Image source={CoffeeBeans} style={styles.image} />
-      </SafeAreaView>
-
-      <View
-        style={{
-          top: 253,
-          position: 'absolute',
-          flexDirection: 'row',
-          alignItems: 'center',
-          paddingHorizontal: 32,
-          height: 323,
-        }}
-      >
-        <CardHighlight />
-        <CardHighlight />
-        <CardHighlight />
-      </View>
-    </View>
+      </Animated.View>
+      <Carrousel />
+    </Animated.View>
   )
 }
