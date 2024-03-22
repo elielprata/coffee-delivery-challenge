@@ -3,6 +3,10 @@ import { StyleSheet } from 'react-native'
 
 export const styles = StyleSheet.create({
   container: {
+    paddingVertical: 16,
+    paddingHorizontal: 32,
+  },
+  button: {
     flex: 1,
     flexDirection: 'row',
     backgroundColor: THEME.COLORS.GRAY_200,
